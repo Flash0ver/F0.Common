@@ -4,6 +4,20 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>F0.Common</AssemblyName>
     <RootNamespace>F0</RootNamespace>
+    <PackageId>F0.Common</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Flash0ver</Authors>
+    <Company>f[0]</Company>
+    <Product>F0.Common</Product>
+    <Description>Provides commonly used implementations and basic functionalities.</Description>
+    <Copyright>© f[0]</Copyright>
+    <PackageLicenseUrl>https://github.com/Flash0ver/F0.Common/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Flash0ver/F0.Common</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Flash0ver/F0/master/Branding/NuGet/F0.Common.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Flash0ver/F0.Common</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>f[0] f0 common</PackageTags>
+    <PackageReleaseNotes>Initial upload providing parity (even/odd) features.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
