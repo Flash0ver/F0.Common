@@ -5,7 +5,7 @@
     <AssemblyName>F0.Common</AssemblyName>
     <RootNamespace>F0</RootNamespace>
     <PackageId>F0.Common</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>Flash0ver</Authors>
     <Company>f[0]</Company>
     <Product>F0.Common</Product>
@@ -17,7 +17,7 @@
     <RepositoryUrl>https://github.com/Flash0ver/F0.Common</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>f[0] f0 common</PackageTags>
-    <PackageReleaseNotes>Initial upload providing parity (even/odd) features.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added providers for progress updates.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
