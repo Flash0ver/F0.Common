@@ -4,6 +4,11 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>F0.Common</AssemblyName>
     <RootNamespace>F0</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>F0.Common</PackageId>
     <Version>0.2.0</Version>
     <Authors>Flash0ver</Authors>
