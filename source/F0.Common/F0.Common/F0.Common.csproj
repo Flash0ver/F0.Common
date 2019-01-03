@@ -19,7 +19,7 @@
     <PackageLicenseUrl>https://github.com/Flash0ver/F0.Common/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Flash0ver/F0.Common</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/Flash0ver/F0/master/Branding/NuGet/F0.Common.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/Flash0ver/F0.Common</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Flash0ver/F0.Common.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>f[0] f0 common</PackageTags>
     <PackageReleaseNotes>Added providers for progress updates.</PackageReleaseNotes>
