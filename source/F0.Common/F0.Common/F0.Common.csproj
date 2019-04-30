@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,7 +16,7 @@
     <Product>F0.Common</Product>
     <Description>Provides commonly used implementations and basic functionalities.</Description>
     <Copyright>© f[0]</Copyright>
-    <PackageLicenseUrl>https://github.com/Flash0ver/F0.Common/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Flash0ver/F0.Common</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/Flash0ver/F0/master/Branding/NuGet/F0.Common.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/Flash0ver/F0.Common.git</RepositoryUrl>
