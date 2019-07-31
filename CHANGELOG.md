@@ -2,6 +2,8 @@
 CHANGELOG
 
 ## vNext
+
+## v0.4.0 (2019-07-31)
 - Added `Mathematics.Parity` checks for `uint`, `long` and `ulong`.
 
 ## v0.3.0 (2019-04-30)
