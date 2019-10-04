@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "F0.Common.sln",
+    "projects": [
+      "example\\F0.Common.Example.Mathematics\\F0.Common.Example.Mathematics.csproj",
+      "example\\F0.Common.Example.Primitives\\F0.Common.Example.Primitives.csproj",
+      "production\\F0.Common\\F0.Common.csproj"
+    ]
+  }
+}

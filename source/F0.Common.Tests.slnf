@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "F0.Common.sln",
+    "projects": [
+      "production\\F0.Common\\F0.Common.csproj",
+      "test\\F0.Common.Tests\\F0.Common.Tests.csproj"
+    ]
+  }
+}
