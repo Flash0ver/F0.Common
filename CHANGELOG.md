@@ -2,6 +2,8 @@
 CHANGELOG
 
 ## vNext
+
+## v0.5.0 (2019-10-10)
 - Added `Primitives.NullDisposable`, a Null Object implementation of `System.IDisposable` as Singleton.
 
 ## v0.4.0 (2019-07-31)
