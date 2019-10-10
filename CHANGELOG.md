@@ -2,6 +2,7 @@
 CHANGELOG
 
 ## vNext
+- Added `Primitives.NullDisposable`, a Null Object implementation of `System.IDisposable` as Singleton.
 
 ## v0.4.0 (2019-07-31)
 - Added `Mathematics.Parity` checks for `uint`, `long` and `ulong`.
