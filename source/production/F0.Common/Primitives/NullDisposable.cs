@@ -4,7 +4,7 @@ namespace F0.Primitives
 {
 	public sealed class NullDisposable : IDisposable
 	{
-		public static NullDisposable Instance { get; } = new NullDisposable();
+		public static IDisposable Instance { get; } = new NullDisposable();
 
 		internal NullDisposable()
 		{
