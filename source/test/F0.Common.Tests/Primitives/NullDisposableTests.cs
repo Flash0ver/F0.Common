@@ -44,5 +44,14 @@ namespace F0.Tests.Primitives
 			instance.Dispose();
 			Assert.Equal(hashCode, instance.GetHashCode());
 		}
+
+		[Fact]
+		public void Dispose_MustNotThrowAnExceptionIfTheMethodIsCalledMultipleTimes()
+		{
+			IDisposable instance = new NullDisposable();
+
+			instance.Dispose();
+			instance.Dispose();
+		}
 	}
 }
