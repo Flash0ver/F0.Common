@@ -2,6 +2,7 @@
 CHANGELOG
 
 ## vNext
+- Added `Primitives.NullAsyncDisposable`, a Null Object implementation of `System.IAsyncDisposable` as Singleton.
 
 ## v0.5.0 (2019-10-10)
 - Added `Primitives.NullDisposable`, a Null Object implementation of `System.IDisposable` as Singleton.
