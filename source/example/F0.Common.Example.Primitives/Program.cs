@@ -13,7 +13,7 @@ namespace F0.Common.Example.Primitives
 			Console.WriteLine("F0.Common");
 			Console.WriteLine();
 
-			IProgress<int> progressIndicator = GetProgress();
+			IProgress<int> progressIndicator = GetProgress(args);
 
 			string outputDirectory = Directory.GetCurrentDirectory();
 			Console.WriteLine($"Output Directory: {outputDirectory}");
@@ -22,12 +22,20 @@ namespace F0.Common.Example.Primitives
 			ListCollection(files);
 		}
 
-		private static IProgress<int> GetProgress()
+		private static IProgress<int> GetProgress(string[] args)
 		{
-			Console.WriteLine($"Enter 'null' to use {typeof(NullProgress<>)}.");
-			Console.WriteLine($"Enter 'immediate' to use {typeof(ImmediateProgress<>)}.");
-			Console.Write($"Otherwise, {typeof(Progress<>)} is used: ");
-			string input = Console.ReadLine();
+			string input;
+			if (args.Length == 1)
+			{
+				input = args[0];
+			}
+			else
+			{
+				Console.WriteLine($"Enter 'null' to use {typeof(NullProgress<>)}.");
+				Console.WriteLine($"Enter 'immediate' to use {typeof(ImmediateProgress<>)}.");
+				Console.Write($"Otherwise, {typeof(Progress<>)} is used: ");
+				input = Console.ReadLine();
+			}
 
 			IProgress<int> progressIndicator;
 			switch (input)

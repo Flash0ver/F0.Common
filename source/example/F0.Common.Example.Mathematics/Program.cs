@@ -10,15 +10,23 @@ namespace F0.Common.Example.Mathematics
 			Console.WriteLine("F0.Common");
 			Console.WriteLine();
 
-			int integer = GetInteger();
+			int integer = GetInteger(args);
 			Console.WriteLine($"{nameof(integer)} {integer} is {(Parity.IsEven(integer) ? "" : "not ")}even.");
 			Console.WriteLine($"{nameof(integer)} {integer} is {(Parity.IsOdd(integer) ? "" : "not ")}odd.");
 		}
 
-		private static int GetInteger()
+		private static int GetInteger(string[] args)
 		{
-			Console.Write("Enter an integer: ");
-			string input = Console.ReadLine();
+			string input;
+			if (args.Length == 1)
+			{
+				input = args[0];
+			}
+			else
+			{
+				Console.Write("Enter an integer: ");
+				input = Console.ReadLine();
+			}
 
 			if (!Int32.TryParse(input, out int integer))
 			{
