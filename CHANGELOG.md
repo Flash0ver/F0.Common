@@ -2,6 +2,7 @@
 CHANGELOG
 
 ## vNext
+- Added target framework: `.NET Standard 2.1`.
 
 ## v0.6.0 (2019-10-30)
 - Added `Primitives.NullAsyncDisposable`, a Null Object implementation of `System.IAsyncDisposable` as Singleton.

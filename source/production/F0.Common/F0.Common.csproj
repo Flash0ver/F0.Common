@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <AssemblyName>F0.Common</AssemblyName>
     <RootNamespace>F0</RootNamespace>
   </PropertyGroup>
@@ -25,8 +25,8 @@
     <PackageReleaseNotes>Added NullAsyncDisposable (null object singleton of System.IAsyncDisposable).</PackageReleaseNotes>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.0.0" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
