@@ -37,20 +37,12 @@ namespace F0.Common.Example.Primitives
 				input = Console.ReadLine();
 			}
 
-			IProgress<int> progressIndicator;
-			switch (input)
+			IProgress<int> progressIndicator = input switch
 			{
-				case "null":
-					progressIndicator = NullProgress<int>.Instance;
-					break;
-				case "immediate":
-					progressIndicator = new ImmediateProgress<int>(value => Console.WriteLine($"Found File #{value}"));
-					break;
-				default:
-					progressIndicator = new Progress<int>(value => Console.WriteLine($"Found File #{value}"));
-					break;
-			}
-
+				"null" => NullProgress<int>.Instance,
+				"immediate" => new ImmediateProgress<int>(value => Console.WriteLine($"Found File #{value}")),
+				_ => new Progress<int>(value => Console.WriteLine($"Found File #{value}")),
+			};
 			Console.WriteLine($"Using {progressIndicator.GetType()}");
 
 			return progressIndicator;
