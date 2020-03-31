@@ -13,6 +13,12 @@ namespace F0.Common.Example.Mathematics
 			int integer = GetInteger(args);
 			Console.WriteLine($"{nameof(integer)} {integer} is {(Parity.IsEven(integer) ? "" : "not ")}even.");
 			Console.WriteLine($"{nameof(integer)} {integer} is {(Parity.IsOdd(integer) ? "" : "not ")}odd.");
+			Console.WriteLine();
+
+			const int min = -240;
+			const int max = +240;
+			Console.WriteLine($"{nameof(integer)} {integer} clamped to the inclusive range of {min} and {max}:");
+			Console.WriteLine(Comparable.Clamp(integer, min, max));
 		}
 
 		private static int GetInteger(string[] args)

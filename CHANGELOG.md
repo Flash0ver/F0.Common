@@ -2,6 +2,7 @@
 CHANGELOG
 
 ## vNext
+- Added `Mathematics.Comparable.Clamp<T>`, clamping a `System.IComparable<T>` to an inclusive range.
 
 ## v0.7.0 (2019-12-31)
 - Added target framework: `.NET Standard 2.1`.
