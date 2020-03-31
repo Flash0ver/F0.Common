@@ -10,7 +10,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>F0.Common</PackageId>
-    <Version>0.7.0</Version>
+    <Version>0.8.0</Version>
     <Authors>Flash0ver</Authors>
     <Company>f[0]</Company>
     <Product>F0.Common</Product>
@@ -22,7 +22,7 @@
     <RepositoryUrl>https://github.com/Flash0ver/F0.Common.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>f[0] f0 common</PackageTags>
-    <PackageReleaseNotes>Added target framework: .NET Standard 2.1.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added clamp of an IComparable to an inclusive range.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
