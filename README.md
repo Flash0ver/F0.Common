@@ -11,3 +11,7 @@ This repo contains an independent .NET Class Library.
 [DotNetApis](http://dotnetapis.com/pkg/F0.Common)\
 [NuGet Must Haves](https://nugetmusthaves.com/Package/F0.Common)\
 [NuGet Trends](https://nugettrends.com/packages?months=12&ids=F0.Common)
+
+## Other external links
+[Libraries.io Packages](https://libraries.io/nuget/F0.Common)\
+[Libraries.io Repositories](https://libraries.io/github/Flash0ver/F0.Common)
