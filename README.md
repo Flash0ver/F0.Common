@@ -1,6 +1,8 @@
 # F0.Common
 This repo contains an independent .NET Class Library.
 
+![F0.Common](https://raw.githubusercontent.com/Flash0ver/F0/master/Branding/GitHub/F0.Common.png)
+
 [![F0.Common on fuget.org](https://www.fuget.org/packages/F0.Common/badge.svg)](https://www.fuget.org/packages/F0.Common)
 
 ## NuGet
