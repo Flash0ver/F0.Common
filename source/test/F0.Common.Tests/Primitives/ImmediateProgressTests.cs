@@ -42,7 +42,7 @@ namespace F0.Tests.Primitives
 			progress = new Progress<object>(value => tcs.SetResult(Thread.CurrentThread.ManagedThreadId));
 
 			progress.Report(null);
-			int threadId = await tcs.Task;
+			int threadId = await tcs.Task.ConfigureAwait(false);
 			Assert.NotEqual(Thread.CurrentThread.ManagedThreadId, threadId);
 		}
 	}
