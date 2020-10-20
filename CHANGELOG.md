@@ -2,8 +2,11 @@
 CHANGELOG
 
 ## vNext
+
+## v0.9.0 (2020-10-20)
 - Added `Extensions.TypeExtensions.GetFriendlyName`, pretty-printing a `System.Type` (_built-in C#_, _array_, _nested_, _generic_, _nullable value_, _anonymous_, _C# tuple_), excluding namespaces.
 - Added `Extensions.TypeExtensions.GetFriendlyFullName`, pretty-printing a `System.Type` (_built-in C#_, _array_, _nested_, _generic_, _nullable value_, _anonymous_, _C# tuple_), including namespaces.
+- Updated `.NET Standard 2.0` dependency on `Microsoft.Bcl.AsyncInterfaces` from `1.1.0` to `1.1.1`.
 
 ## v0.8.0 (2020-03-31)
 - Added `Mathematics.Comparable.Clamp<T>`, clamping a `System.IComparable<T>` to an inclusive range.
