@@ -19,9 +19,19 @@ namespace F0.Tests.Mathematics
 		{
 			ArgumentException f0Exception = Assert.Throws<ArgumentException>(() => Comparable.Clamp(2, 3, 1));
 
-			ArgumentException mathException = Assert.Throws<ArgumentException>(() => Math.Clamp(2, 3, 1));
+			string expectedMessage = GetMessage(2, 3, 1);
 
-			Assert.Equal(mathException.Message, f0Exception.Message);
+			Assert.Equal(expectedMessage, f0Exception.Message);
+
+			static string GetMessage(int value, int min, int max)
+			{
+#if HAS_MATH_CLAMP
+				ArgumentException mathException = Assert.Throws<ArgumentException>(() => Math.Clamp(value, min, max));
+				return mathException.Message;
+#else
+				return $"'{min}' cannot be greater than {max}.";
+#endif
+			}
 		}
 
 		[Theory]

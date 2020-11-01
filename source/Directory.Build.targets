@@ -1,2 +1,7 @@
 <Project>
+
+  <PropertyGroup Condition="('$(TargetFrameworkIdentifier)' == '.NETStandard' And $([MSBuild]::VersionEquals($(TargetFrameworkVersion), 2.1))) Or ('$(TargetFrameworkIdentifier)' == '.NETCoreApp' And $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), 2.0)))">
+    <DefineConstants>$(DefineConstants);HAS_MATH_CLAMP</DefineConstants>
+  </PropertyGroup>
+
 </Project>
