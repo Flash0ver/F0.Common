@@ -1,4 +1,4 @@
-﻿namespace F0.Mathematics
+namespace F0.Mathematics
 {
 	public static class Parity
 	{
