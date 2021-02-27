@@ -2,6 +2,7 @@
 CHANGELOG
 
 ## vNext
+- Package: Embed icon (fixed _NuGet Warning NU5048_), keep fallback icon URL.
 
 ## v0.9.0 (2020-10-20)
 - Added `Extensions.TypeExtensions.GetFriendlyName`, pretty-printing a `System.Type` (_built-in C#_, _array_, _nested_, _generic_, _nullable value_, _anonymous_, _C# tuple_), excluding namespaces.
@@ -25,6 +26,7 @@ CHANGELOG
 
 ## v0.3.0 (2019-04-30)
 - Changed target framework from `.NET Standard 1.0` to `.NET Standard 2.0`.
+- Package: Use license expression instead of deprecated license URL (fixed _NuGet Warning NU5125_).
 
 ## v0.2.0 (2018-12-21)
 - Added `Primitives.ImmediateProgress<T>`, a synchronous `System.IProgress<T>`, unlike `System.Progress<T>`.
