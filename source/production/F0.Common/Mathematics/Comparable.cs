@@ -7,20 +7,9 @@ namespace F0.Mathematics
 		public static T Clamp<T>(T value, T min, T max)
 			where T : IComparable<T>
 		{
-			if (value is null)
-			{
-				throw new ArgumentNullException(nameof(value));
-			}
-
-			if (min is null)
-			{
-				throw new ArgumentNullException(nameof(min));
-			}
-
-			if (max is null)
-			{
-				throw new ArgumentNullException(nameof(max));
-			}
+			_ = value ?? throw new ArgumentNullException(nameof(value));
+			_ = min ?? throw new ArgumentNullException(nameof(min));
+			_ = max ?? throw new ArgumentNullException(nameof(max));
 
 			if (min.CompareTo(max) > 0)
 			{

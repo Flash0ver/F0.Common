@@ -50,7 +50,7 @@ namespace F0.Common.Example.Primitives
 
 		private static string[] GetFiles(string path, IProgress<int> progress)
 		{
-			var files = new List<string>();
+			List<string> files = new();
 
 			IEnumerable<string> filePaths = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories);
 

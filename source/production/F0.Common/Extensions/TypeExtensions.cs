@@ -19,7 +19,7 @@ namespace F0.Extensions
 				return "null";
 			}
 
-			var nameBuilder = new StringBuilder();
+			StringBuilder nameBuilder = new();
 			SetFriendlyName(type, false, nameBuilder);
 			return nameBuilder.ToString();
 		}
@@ -31,7 +31,7 @@ namespace F0.Extensions
 				return "null";
 			}
 
-			var nameBuilder = new StringBuilder();
+			StringBuilder nameBuilder = new();
 			SetFriendlyName(type, true, nameBuilder);
 			return nameBuilder.ToString();
 		}
@@ -99,20 +99,20 @@ namespace F0.Extensions
 				int offset = 0;
 
 				Type enclosingType = type.DeclaringType;
-				if (enclosingType is { })
+				if (enclosingType is not null)
 				{
-					var containingGenericArguments = new ArraySegment<Type>(genericArguments);
+					ArraySegment<Type> containingGenericArguments = new(genericArguments);
 					offset = SetFriendlyNestedName(enclosingType, containingGenericArguments, useFullyQualifiedName, nameBuilder);
 				}
 
 				int count = genericArguments.Length - offset;
-				if (count is 0)
+				if (count == 0)
 				{
 					SetFriendlyNonGenericName(type, false, nameBuilder);
 				}
 				else
 				{
-					var genericArgumentsSection = new ArraySegment<Type>(genericArguments, offset, count);
+					ArraySegment<Type> genericArgumentsSection = new(genericArguments, offset, count);
 					SetFriendlyGenericName(type, genericArgumentsSection, useFullyQualifiedName, nameBuilder);
 				}
 			}
@@ -170,7 +170,7 @@ namespace F0.Extensions
 
 		private static void SetFriendlyGenericName(Type type, ArraySegment<Type> genericArguments, bool useFullyQualifiedName, StringBuilder nameBuilder)
 		{
-			string mangledGenericTypeName = GetTypeName(type, type.IsNested ? false : useFullyQualifiedName)
+			string mangledGenericTypeName = GetTypeName(type, !type.IsNested && useFullyQualifiedName)
 				?? type.Namespace + "." + type.Name;
 			string genericSeparator = $"`{genericArguments.Count}";
 			int index = mangledGenericTypeName.IndexOf(genericSeparator);
@@ -202,11 +202,11 @@ namespace F0.Extensions
 			int length = type.GetGenericArguments().Length;
 
 			Type enclosingType = type.DeclaringType;
-			if (enclosingType is { })
+			if (enclosingType is not null)
 			{
 				int offset = genericArguments.Count - length;
 				int count = length;
-				var genericArgumentsSection = new ArraySegment<Type>(genericArguments.Array, offset, count);
+				ArraySegment<Type> genericArgumentsSection = new(genericArguments.Array, offset, count);
 
 				pointer = SetFriendlyNestedName(enclosingType, genericArgumentsSection, useFullyQualifiedName, nameBuilder);
 				length -= pointer;
@@ -214,11 +214,11 @@ namespace F0.Extensions
 
 			if (length is 0)
 			{
-				SetFriendlyNonGenericName(type, type.IsNested ? false : useFullyQualifiedName, nameBuilder);
+				SetFriendlyNonGenericName(type, !type.IsNested && useFullyQualifiedName, nameBuilder);
 			}
 			else
 			{
-				var genericArgumentsSection = new ArraySegment<Type>(genericArguments.Array, pointer, length);
+				ArraySegment<Type> genericArgumentsSection = new(genericArguments.Array, pointer, length);
 				SetFriendlyGenericName(type, genericArgumentsSection, useFullyQualifiedName, nameBuilder);
 			}
 
@@ -243,28 +243,18 @@ namespace F0.Extensions
 
 				if (i + 1 < length)
 				{
-					if (genericArgument.IsGenericParameter || genericArguments.Array[i + 1].IsGenericParameter)
-					{
-						_ = nameBuilder.Append(',');
-					}
-					else
-					{
-						_ = nameBuilder.Append(", ");
-					}
+					_ = genericArgument.IsGenericParameter || genericArguments.Array[i + 1].IsGenericParameter
+						? nameBuilder.Append(',')
+						: nameBuilder.Append(", ");
 				}
 			}
 		}
 
 		private static string GetTypeName(Type type, bool useFullyQualifiedName)
 		{
-			if (useFullyQualifiedName)
-			{
-				return type.FullName;
-			}
-			else
-			{
-				return type.Name;
-			}
+			return useFullyQualifiedName
+				? type.FullName
+				: type.Name;
 		}
 
 		private static bool IsAnonymousType(this Type type)

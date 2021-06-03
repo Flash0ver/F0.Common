@@ -38,7 +38,7 @@ namespace F0.Tests.Primitives
 			Assert.NotNull(thread);
 			Assert.Same(Thread.CurrentThread, thread);
 
-			var tcs = new TaskCompletionSource<int>();
+			TaskCompletionSource<int> tcs = new();
 			progress = new Progress<object>(value => tcs.SetResult(Thread.CurrentThread.ManagedThreadId));
 
 			progress.Report(null);

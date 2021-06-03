@@ -533,7 +533,7 @@ namespace F0.Tests.Extensions
 		{
 			string text = "F0";
 			int number = 240;
-			var collection = new List<KeyValuePair<bool, BigInteger>>();
+			List<KeyValuePair<bool, BigInteger>> collection = new();
 
 			return new object[][]
 			{
