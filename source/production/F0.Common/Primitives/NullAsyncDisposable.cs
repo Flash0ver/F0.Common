@@ -13,7 +13,11 @@ namespace F0.Primitives
 
 		ValueTask IAsyncDisposable.DisposeAsync()
 		{
+#if HAS_VALUETASK_COMPLETEDTASK
+			return ValueTask.CompletedTask;
+#else
 			return default;
+#endif
 		}
 	}
 }
