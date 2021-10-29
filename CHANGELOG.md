@@ -4,6 +4,7 @@ CHANGELOG
 ## vNext
 - Added target framework: `.NET 5`.
 - Added annotations for _nullable reference types_.
+- Added `Mathematics.Parity` checks for _native-sized integers_ (`nint` and `nuint`).
 - Fixed `TypeExtensions.GetFriendlyName`, throwing a `System.NullReferenceException` when passing a `System.Type` without a _namespace_.
 - Package: Embed icon (fixed _NuGet Warning NU5048_), keep fallback icon URL.
 
@@ -25,7 +26,7 @@ CHANGELOG
 - Added `Primitives.NullDisposable`, a Null Object implementation of `System.IDisposable` as Singleton.
 
 ## v0.4.0 (2019-07-31)
-- Added `Mathematics.Parity` checks for `uint`, `long` and `ulong`.
+- Added `Mathematics.Parity` checks for `uint`, `long` and `ulong` (even/odd).
 
 ## v0.3.0 (2019-04-30)
 - Changed target framework from `.NET Standard 1.0` to `.NET Standard 2.0`.

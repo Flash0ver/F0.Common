@@ -161,5 +161,84 @@ namespace F0.Tests.Mathematics
 			Assert.True(Parity.IsOdd(integer));
 			Assert.False(Parity.IsEven(integer));
 		}
+
+		[Theory]
+		[MemberData(nameof(NativeSizedSignedIntegerData), true)]
+		public void Even_NativeSizedSignedInteger(nint integer)
+		{
+			Assert.True(Parity.IsEven(integer));
+			Assert.False(Parity.IsOdd(integer));
+		}
+
+		[Theory]
+		[MemberData(nameof(NativeSizedSignedIntegerData), false)]
+		public void Odd_NativeSizedSignedInteger(nint integer)
+		{
+			Assert.True(Parity.IsOdd(integer));
+			Assert.False(Parity.IsEven(integer));
+		}
+
+		[Theory]
+		[MemberData(nameof(NativeSizedUnsignedIntegerData), true)]
+		public void Even_NativeSizedUnsignedInteger(nuint integer)
+		{
+			Assert.True(Parity.IsEven(integer));
+			Assert.False(Parity.IsOdd(integer));
+		}
+
+		[Theory]
+		[MemberData(nameof(NativeSizedUnsignedIntegerData), false)]
+		public void Odd_NativeSizedUnsignedInteger(nuint integer)
+		{
+			Assert.True(Parity.IsOdd(integer));
+			Assert.False(Parity.IsEven(integer));
+		}
+
+		private static TheoryData<nint> NativeSizedSignedIntegerData(bool isEven)
+		{
+			TheoryData<nint> data = new();
+			if (isEven)
+			{
+#if HAS_INTPTR_MINVALUE
+				data.Add(IntPtr.MinValue);
+#endif
+				data.Add(Int32.MinValue);
+				data.Add(-2);
+				data.Add(0);
+				data.Add(+2);
+			}
+			else
+			{
+				data.Add(-1);
+				data.Add(+1);
+				data.Add(Int32.MaxValue);
+#if HAS_INTPTR_MAXVALUE
+				data.Add(IntPtr.MaxValue);
+#endif
+			}
+			return data;
+		}
+
+		private static TheoryData<nuint> NativeSizedUnsignedIntegerData(bool isEven)
+		{
+			TheoryData<nuint> data = new();
+			if (isEven)
+			{
+#if HAS_UINTPTR_MINVALUE
+				data.Add(UIntPtr.MinValue);
+#endif
+				data.Add(UInt32.MinValue);
+				data.Add(2u);
+			}
+			else
+			{
+				data.Add(1u);
+				data.Add(UInt32.MaxValue);
+#if HAS_UINTPTR_MAXVALUE
+				data.Add(UIntPtr.MaxValue);
+#endif
+			}
+			return data;
+		}
 	}
 }

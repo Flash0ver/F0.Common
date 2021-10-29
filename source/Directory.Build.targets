@@ -11,8 +11,13 @@
   <PropertyGroup Condition="('$(TargetFrameworkIdentifier)' == '.NETStandard' And $([MSBuild]::VersionEquals($(TargetFrameworkVersion), '2.1'))) Or ('$(TargetFrameworkIdentifier)' == '.NETCoreApp' And $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '2.1')))">
     <DefineConstants>$(DefineConstants);HAS_READONLY_SPAN</DefineConstants>
   </PropertyGroup>
+
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net5.0'))">
     <DefineConstants>$(DefineConstants);HAS_VALUETASK_COMPLETEDTASK</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_INTPTR_MINVALUE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_INTPTR_MAXVALUE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_UINTPTR_MINVALUE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_UINTPTR_MAXVALUE</DefineConstants>
   </PropertyGroup>
 
 </Project>

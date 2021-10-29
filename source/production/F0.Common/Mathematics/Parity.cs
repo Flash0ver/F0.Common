@@ -26,6 +26,18 @@ namespace F0.Mathematics
 			return remainder == 0ul;
 		}
 
+		public static bool IsEven(nint integer)
+		{
+			nint remainder = integer % 2;
+			return remainder == 0;
+		}
+
+		public static bool IsEven(nuint integer)
+		{
+			nuint remainder = integer % 2;
+			return remainder == 0;
+		}
+
 		public static bool IsOdd(int integer)
 		{
 			int remainder = integer % 2;
@@ -48,6 +60,18 @@ namespace F0.Mathematics
 		{
 			ulong remainder = integer % 2ul;
 			return remainder == 1ul;
+		}
+
+		public static bool IsOdd(nint integer)
+		{
+			nint remainder = integer % 2;
+			return remainder != 0;
+		}
+
+		public static bool IsOdd(nuint integer)
+		{
+			nuint remainder = integer % 2;
+			return remainder != 0;
 		}
 	}
 }
