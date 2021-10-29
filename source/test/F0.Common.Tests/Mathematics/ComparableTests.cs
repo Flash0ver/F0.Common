@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using F0.Mathematics;
 using Xunit;
 
@@ -9,9 +10,9 @@ namespace F0.Tests.Mathematics
 		[Fact]
 		public void Clamp_Null_Throws()
 		{
-			Assert.Throws<ArgumentNullException>("value", () => Comparable.Clamp(null, "", ""));
-			Assert.Throws<ArgumentNullException>("min", () => Comparable.Clamp("", null, ""));
-			Assert.Throws<ArgumentNullException>("max", () => Comparable.Clamp("", "", null));
+			Assert.Throws<ArgumentNullException>("value", () => Comparable.Clamp(null!, "", ""));
+			Assert.Throws<ArgumentNullException>("min", () => Comparable.Clamp("", null!, ""));
+			Assert.Throws<ArgumentNullException>("max", () => Comparable.Clamp("", "", null!));
 		}
 
 		[Fact]
@@ -74,14 +75,14 @@ namespace F0.Tests.Mathematics
 		[Fact]
 		public void Clamp_TypeArgumentIsReferenceType_ReturnsPassedInstance()
 		{
-			string zero = "0";
-			string one = "1";
-			string two = "2";
-			string three = "3";
-			string four = "4";
+			string zero = NonInterned("0");
+			string one = NonInterned("1");
+			string two = NonInterned("2");
+			string three = NonInterned("3");
+			string four = NonInterned("4");
 
-			string lowerBound = "1";
-			string upperBound = "3";
+			string lowerBound = NonInterned("1");
+			string upperBound = NonInterned("3");
 
 			Assert.Same(lowerBound, Comparable.Clamp(zero, lowerBound, upperBound));
 			Assert.Same(one, Comparable.Clamp(one, lowerBound, upperBound));
@@ -95,6 +96,18 @@ namespace F0.Tests.Mathematics
 
 			ArgumentException exception = Assert.Throws<ArgumentException>(() => Comparable.Clamp(two, three, one));
 			Assert.Equal("'3' cannot be greater than 1.", exception.Message);
+		}
+
+		private static string NonInterned(string str)
+		{
+#if HAS_READONLY_SPAN
+			string text = new(str);
+#else
+			Debug.Assert(str.Length == 1);
+			string text = new(str[0], 1);
+#endif
+
+			return text;
 		}
 	}
 }

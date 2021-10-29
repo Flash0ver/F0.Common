@@ -1,9 +1,16 @@
 <Project>
 
+  <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' Or ('$(TargetFrameworkIdentifier)' == '.NETCoreApp' And $([MSBuild]::VersionLessThan($(TargetFrameworkVersion), '3.0'))) Or ('$(TargetFrameworkIdentifier)' == '.NETStandard' And $([MSBuild]::VersionLessThan($(TargetFrameworkVersion), '2.1')))">
+    <NoWarn>$(NoWarn);nullable</NoWarn>
+  </PropertyGroup>
+
   <PropertyGroup Condition="('$(TargetFrameworkIdentifier)' == '.NETStandard' And $([MSBuild]::VersionEquals($(TargetFrameworkVersion), '2.1'))) Or ('$(TargetFrameworkIdentifier)' == '.NETCoreApp' And $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '2.0')))">
     <DefineConstants>$(DefineConstants);HAS_MATH_CLAMP</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="('$(TargetFrameworkIdentifier)' == '.NETStandard' And $([MSBuild]::VersionEquals($(TargetFrameworkVersion), '2.1'))) Or ('$(TargetFrameworkIdentifier)' == '.NETCoreApp' And $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '2.1')))">
+    <DefineConstants>$(DefineConstants);HAS_READONLY_SPAN</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net5.0'))">
     <DefineConstants>$(DefineConstants);HAS_VALUETASK_COMPLETEDTASK</DefineConstants>
   </PropertyGroup>

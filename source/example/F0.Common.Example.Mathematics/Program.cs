@@ -23,7 +23,7 @@ namespace F0.Common.Example.Mathematics
 
 		private static int GetInteger(string[] args)
 		{
-			string input;
+			string? input;
 			if (args.Length == 1)
 			{
 				input = args[0];

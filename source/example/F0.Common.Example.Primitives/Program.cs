@@ -24,7 +24,7 @@ namespace F0.Common.Example.Primitives
 
 		private static IProgress<int> GetProgress(string[] args)
 		{
-			string input;
+			string? input;
 			if (args.Length == 1)
 			{
 				input = args[0];

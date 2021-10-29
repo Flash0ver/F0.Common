@@ -11,7 +11,7 @@ namespace F0.Tests.Primitives
 		[Fact]
 		public void Callback_ToBeInvokedForEachReportedProgressValue_MustNotBeNull()
 		{
-			Assert.Throws<ArgumentNullException>("handler", () => new ImmediateProgress<bool>(null));
+			Assert.Throws<ArgumentNullException>("handler", () => new ImmediateProgress<bool>(null!));
 		}
 
 		[Fact]
@@ -30,8 +30,8 @@ namespace F0.Tests.Primitives
 		[Fact]
 		public async Task CallbacksAreInvokedSynchronously_NeitherThroughSynchronizationContextNorOnTheThreadPool()
 		{
-			Thread thread = null;
-			IProgress<object> progress = new ImmediateProgress<object>(value => thread = Thread.CurrentThread);
+			Thread? thread = null;
+			IProgress<object?> progress = new ImmediateProgress<object?>(value => thread = Thread.CurrentThread);
 
 			Assert.Null(thread);
 			progress.Report(null);
@@ -39,7 +39,7 @@ namespace F0.Tests.Primitives
 			Assert.Same(Thread.CurrentThread, thread);
 
 			TaskCompletionSource<int> tcs = new();
-			progress = new Progress<object>(value => tcs.SetResult(Thread.CurrentThread.ManagedThreadId));
+			progress = new Progress<object?>(value => tcs.SetResult(Thread.CurrentThread.ManagedThreadId));
 
 			progress.Report(null);
 			int threadId = await tcs.Task.ConfigureAwait(false);

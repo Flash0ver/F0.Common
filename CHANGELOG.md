@@ -3,6 +3,8 @@ CHANGELOG
 
 ## vNext
 - Added target framework: `.NET 5`.
+- Added annotations for _nullable reference types_.
+- Fixed `TypeExtensions.GetFriendlyName`, throwing a `System.NullReferenceException` when passing a `System.Type` without a _namespace_.
 - Package: Embed icon (fixed _NuGet Warning NU5048_), keep fallback icon URL.
 
 ## v0.9.0 (2020-10-20)

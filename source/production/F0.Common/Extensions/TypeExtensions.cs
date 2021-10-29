@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,7 +13,7 @@ namespace F0.Extensions
 		private static readonly IReadOnlyDictionary<Type, string> cSharpLanguageKeywords = GetCSharpLanguageKeywords();
 		private static readonly ISet<Type> cSharpTupleTypes = GetCSharpTupleTypes();
 
-		public static string GetFriendlyName(this Type type)
+		public static string GetFriendlyName(this Type? type)
 		{
 			if (type is null)
 			{
@@ -24,7 +25,7 @@ namespace F0.Extensions
 			return nameBuilder.ToString();
 		}
 
-		public static string GetFriendlyFullName(this Type type)
+		public static string GetFriendlyFullName(this Type? type)
 		{
 			if (type is null)
 			{
@@ -50,9 +51,9 @@ namespace F0.Extensions
 			{
 				SetFriendlyAnonymousName(type, useFullyQualifiedName, nameBuilder);
 			}
-			else if (type.IsConstructedNullableValueType())
+			else if (type.TryGetConstructedNullableValueType(out Type? underlyingValueType))
 			{
-				SetFriendlyNullableValueName(type, useFullyQualifiedName, nameBuilder);
+				SetFriendlyNullableValueName(underlyingValueType, useFullyQualifiedName, nameBuilder);
 			}
 			else if (type.IsGenericType)
 			{
@@ -73,21 +74,24 @@ namespace F0.Extensions
 
 		private static void SetFriendlyArrayName(Type type, bool useFullyQualifiedName, StringBuilder nameBuilder)
 		{
-			Type innerType = type.GetElementType();
+			Type? innerType = type.GetElementType();
+			Debug.Assert(innerType is not null, $"IsArray={type.IsArray} of '{type}'.");
 			while (innerType.IsArray)
 			{
 				innerType = innerType.GetElementType();
+				Debug.Assert(innerType is not null, $"Current type of '{type}' is not an array.");
 			}
 
 			SetFriendlyName(innerType, useFullyQualifiedName, nameBuilder);
 
-			Type encompassedType = type;
+			Type? encompassedType = type;
 			while (encompassedType.IsArray)
 			{
 				_ = nameBuilder.Append('[');
 				_ = nameBuilder.Append(',', encompassedType.GetArrayRank() - 1);
 				_ = nameBuilder.Append(']');
 				encompassedType = encompassedType.GetElementType();
+				Debug.Assert(encompassedType is not null, $"Current type of '{type}' is not an array.");
 			}
 		}
 
@@ -98,7 +102,7 @@ namespace F0.Extensions
 				Type[] genericArguments = type.GetGenericArguments();
 				int offset = 0;
 
-				Type enclosingType = type.DeclaringType;
+				Type? enclosingType = type.DeclaringType;
 				if (enclosingType is not null)
 				{
 					ArraySegment<Type> containingGenericArguments = new(genericArguments);
@@ -118,10 +122,12 @@ namespace F0.Extensions
 			}
 			else if (!type.IsGenericParameter)
 			{
-				string typeName = type.FullName;
-				if (!useFullyQualifiedName)
+				string? typeName = type.FullName;
+				Debug.Assert(typeName is not null, $"'{type}' is a generic type parameter or an array type.");
+				string? @namespace = type.Namespace;
+				if (!useFullyQualifiedName && @namespace is not null)
 				{
-					typeName = typeName.Substring(type.Namespace.Length + 1);
+					typeName = typeName.Substring(@namespace.Length + 1);
 				}
 				_ = nameBuilder.Append(typeName);
 			}
@@ -146,9 +152,8 @@ namespace F0.Extensions
 			_ = nameBuilder.Append('}');
 		}
 
-		private static void SetFriendlyNullableValueName(Type type, bool useFullyQualifiedName, StringBuilder nameBuilder)
+		private static void SetFriendlyNullableValueName(Type underlyingValueType, bool useFullyQualifiedName, StringBuilder nameBuilder)
 		{
-			Type underlyingValueType = Nullable.GetUnderlyingType(type);
 			SetFriendlyName(underlyingValueType, useFullyQualifiedName, nameBuilder);
 			_ = nameBuilder.Append('?');
 		}
@@ -185,13 +190,14 @@ namespace F0.Extensions
 
 		private static void SetFriendlyNonGenericName(Type type, bool useFullyQualifiedName, StringBuilder nameBuilder)
 		{
-			if (cSharpLanguageKeywords.TryGetValue(type, out string cSharpLanguageKeyword))
+			if (cSharpLanguageKeywords.TryGetValue(type, out string? cSharpLanguageKeyword))
 			{
 				_ = nameBuilder.Append(cSharpLanguageKeyword);
 			}
 			else
 			{
-				string typeName = GetTypeName(type, useFullyQualifiedName);
+				string? typeName = GetTypeName(type, useFullyQualifiedName);
+				Debug.Assert(!useFullyQualifiedName || typeName is not null, $"'{type}' is a generic type parameter or an array type.");
 				_ = nameBuilder.Append(typeName);
 			}
 		}
@@ -201,12 +207,12 @@ namespace F0.Extensions
 			int pointer = 0;
 			int length = type.GetGenericArguments().Length;
 
-			Type enclosingType = type.DeclaringType;
+			Type? enclosingType = type.DeclaringType;
 			if (enclosingType is not null)
 			{
 				int offset = genericArguments.Count - length;
 				int count = length;
-				ArraySegment<Type> genericArgumentsSection = new(genericArguments.Array, offset, count);
+				ArraySegment<Type> genericArgumentsSection = new(genericArguments.Array!, offset, count);
 
 				pointer = SetFriendlyNestedName(enclosingType, genericArgumentsSection, useFullyQualifiedName, nameBuilder);
 				length -= pointer;
@@ -218,7 +224,7 @@ namespace F0.Extensions
 			}
 			else
 			{
-				ArraySegment<Type> genericArgumentsSection = new(genericArguments.Array, pointer, length);
+				ArraySegment<Type> genericArgumentsSection = new(genericArguments.Array!, pointer, length);
 				SetFriendlyGenericName(type, genericArgumentsSection, useFullyQualifiedName, nameBuilder);
 			}
 
@@ -238,7 +244,7 @@ namespace F0.Extensions
 
 			for (int i = genericArguments.Offset; i < length; i++)
 			{
-				Type genericArgument = genericArguments.Array[i];
+				Type genericArgument = genericArguments.Array![i];
 				SetFriendlyName(genericArgument, useFullyQualifiedName, nameBuilder);
 
 				if (i + 1 < length)
@@ -250,7 +256,7 @@ namespace F0.Extensions
 			}
 		}
 
-		private static string GetTypeName(Type type, bool useFullyQualifiedName)
+		private static string? GetTypeName(Type type, bool useFullyQualifiedName)
 		{
 			return useFullyQualifiedName
 				? type.FullName
@@ -265,9 +271,10 @@ namespace F0.Extensions
 				&& type.Namespace is null;
 		}
 
-		private static bool IsConstructedNullableValueType(this Type type)
+		private static bool TryGetConstructedNullableValueType(this Type type, [NotNullWhen(true)] out Type? nullableTypeArgument)
 		{
-			return Nullable.GetUnderlyingType(type) != null;
+			nullableTypeArgument = Nullable.GetUnderlyingType(type);
+			return nullableTypeArgument is not null;
 		}
 
 		private static bool IsTupleType(this Type type)

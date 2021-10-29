@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks;
 using F0.Extensions;
@@ -17,7 +18,7 @@ namespace F0.Tests.Extensions
 		[Fact]
 		public void GetFriendlyName_Null()
 		{
-			Type type = null;
+			Type? type = null;
 
 			string friendlyName = type.GetFriendlyName();
 			string friendlyFullName = type.GetFriendlyFullName();
@@ -110,12 +111,14 @@ namespace F0.Tests.Extensions
 		[Fact]
 		public void GetFriendlyName_ClosedGeneric_Partially()
 		{
-			Type type1 = typeof(GenericType<object>).BaseType;
-			Type type2 = typeof(GenericType<>).BaseType;
-			Type type3 = typeof(GenericType<ValueTuple, object, object>).BaseType;
-			Type type4 = typeof(GenericType<,,>).BaseType;
-			Type type5 = typeof(GenericType<Action, object, DateTimeOffset, DateTimeKind>).BaseType;
-			Type type6 = typeof(GenericType<,,,>).BaseType;
+			Type? type1 = typeof(GenericType<object>).BaseType;
+			Type? type2 = typeof(GenericType<>).BaseType;
+			Type? type3 = typeof(GenericType<ValueTuple, object, object>).BaseType;
+			Type? type4 = typeof(GenericType<,,>).BaseType;
+			Type? type5 = typeof(GenericType<Action, object, DateTimeOffset, DateTimeKind>).BaseType;
+			Type? type6 = typeof(GenericType<,,,>).BaseType;
+
+			Debug.Assert(type1 is not null && type2 is not null && type3 is not null && type4 is not null && type5 is not null && type6 is not null);
 
 			Assert.False(type1.IsGenericTypeDefinition, "generic type is a generic type definition");
 			Assert.False(type2.IsGenericTypeDefinition, "generic type is a generic type definition");
@@ -395,6 +398,10 @@ namespace F0.Tests.Extensions
 				new object[] { typeof(NestingLevel1<float>.NestingLevel2<double>.NestingLevel3<decimal>), "NestingLevel1<float>+NestingLevel2<double>+NestingLevel3<decimal>", "F0.Tests.Shared.NestingLevel1<float>+NestingLevel2<double>+NestingLevel3<decimal>" },
 				new object[] { typeof(NestingLevel1<,>.NestingLevel2.NestingLevel3<>), "NestingLevel1<,>+NestingLevel2+NestingLevel3<>", "F0.Tests.Shared.NestingLevel1<,>+NestingLevel2+NestingLevel3<>" },
 				new object[] { typeof(NestingLevel1<float, double>.NestingLevel2.NestingLevel3<decimal>), "NestingLevel1<float, double>+NestingLevel2+NestingLevel3<decimal>", "F0.Tests.Shared.NestingLevel1<float, double>+NestingLevel2+NestingLevel3<decimal>" },
+
+				new object[] { typeof(GlobalType.NestedType), "GlobalType+NestedType", "GlobalType+NestedType" },
+				new object[] { typeof(GlobalType<>.NestedType), "GlobalType<>+NestedType", "GlobalType<>+NestedType" },
+				new object[] { typeof(GlobalType<GlobalType.NestedType>.NestedType), "GlobalType<GlobalType+NestedType>+NestedType", "GlobalType<GlobalType+NestedType>+NestedType" },
 			};
 		}
 
