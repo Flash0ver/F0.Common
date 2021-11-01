@@ -1,0 +1,8 @@
+<Project>
+
+  <PropertyGroup>
+    <F0Version>0.9.0</F0Version>
+    <F0PackageReleaseNotes>Added pretty-printing the name (with and without namespace) of built-in C#, array, nested, generic, nullable value, anonymous, and C# tuple types.</F0PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>
