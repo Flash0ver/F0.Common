@@ -3,6 +3,7 @@ CHANGELOG
 
 ## vNext
 - Added target framework: `.NET 5`.
+- Added support for platform `browser`.
 - Added annotations for _nullable reference types_.
 - Added `Mathematics.Parity` checks for _native-sized integers_ (`nint` and `nuint`).
 - Changed `Extensions.TypeExtensions.GetFriendlyName` and `Extensions.TypeExtensions.GetFriendlyFullName`, pretty-printing both _native-sized integers_ (`System.IntPtr` and `System.UIntPtr`) as _C# 9.0_ keywords (`nint` and `nuint`).

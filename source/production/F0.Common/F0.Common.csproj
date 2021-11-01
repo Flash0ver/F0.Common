@@ -26,6 +26,10 @@
     <PackageReleaseNotes>Added pretty-printing the name (with and without namespace) of built-in C#, array, nested, generic, nullable value, anonymous, and C# tuple types.</PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="all" />
