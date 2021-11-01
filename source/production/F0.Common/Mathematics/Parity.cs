@@ -71,7 +71,7 @@ namespace F0.Mathematics
 		public static bool IsOdd(nuint integer)
 		{
 			nuint remainder = integer % 2;
-			return remainder != 0;
+			return remainder == 1;
 		}
 	}
 }

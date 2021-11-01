@@ -265,17 +265,19 @@ namespace F0.Tests.Extensions
 				new object[] { typeof(bool), "bool" }, //System.Boolean
 				new object[] { typeof(byte), "byte" }, //System.Byte
 				new object[] { typeof(char), "char" }, //System.Char
+				new object[] { typeof(decimal), "decimal" }, //System.Decimal
 				new object[] { typeof(double), "double" }, //System.Double
 				new object[] { typeof(short), "short" }, //System.Int16
 				new object[] { typeof(int), "int" }, //System.Int32
 				new object[] { typeof(long), "long" }, //System.Int64
+				new object[] { typeof(nint), "nint" }, //System.IntPtr
 				new object[] { typeof(sbyte), "sbyte" }, //System.SByte
 				new object[] { typeof(float), "float" }, //System.Single
 				new object[] { typeof(ushort), "ushort" }, //System.UInt16
 				new object[] { typeof(uint), "uint" }, //System.UInt32
 				new object[] { typeof(ulong), "ulong" }, //System.UInt64
+				new object[] { typeof(nuint), "nuint" }, //System.UIntPtr
 
-				new object[] { typeof(decimal), "decimal" }, //System.Decimal
 				new object[] { typeof(object), "object" }, //System.Object
 				new object[] { typeof(string), "string" }, //System.String
 				new object[] { typeof(void), "void" }, //System.Void
@@ -333,8 +335,6 @@ namespace F0.Tests.Extensions
 			{
 				new object[] { typeof(DateTime) },
 				new object[] { typeof(DateTimeOffset) },
-				new object[] { typeof(IntPtr) },
-				new object[] { typeof(UIntPtr) },
 				new object[] { typeof(BigInteger) },
 				new object[] { typeof(Complex) },
 				new object[] { typeof(IEnumerable) },
@@ -347,6 +347,9 @@ namespace F0.Tests.Extensions
 				new object[] { typeof(DateTimeKind) },
 				new object[] { typeof(PropertyChangedEventHandler) },
 				new object[] { typeof(NotifyCollectionChangedEventHandler) },
+#if HAS_HALF
+				new object[] { typeof(Half) },
+#endif
 			};
 		}
 

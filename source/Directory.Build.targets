@@ -18,6 +18,8 @@
     <DefineConstants>$(DefineConstants);HAS_INTPTR_MAXVALUE</DefineConstants>
     <DefineConstants>$(DefineConstants);HAS_UINTPTR_MINVALUE</DefineConstants>
     <DefineConstants>$(DefineConstants);HAS_UINTPTR_MAXVALUE</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_HALF</DefineConstants>
+    <DefineConstants>$(DefineConstants);HAS_READONLYSET</DefineConstants>
   </PropertyGroup>
 
 </Project>

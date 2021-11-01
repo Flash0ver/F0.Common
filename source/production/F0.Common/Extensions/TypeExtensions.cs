@@ -6,12 +6,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+#if HAS_READONLYSET
+using TypeSet = System.Collections.Generic.IReadOnlySet<System.Type>;
+#else
+using TypeSet = System.Collections.Generic.ISet<System.Type>;
+#endif
+
 namespace F0.Extensions
 {
 	public static class TypeExtensions
 	{
 		private static readonly IReadOnlyDictionary<Type, string> cSharpLanguageKeywords = GetCSharpLanguageKeywords();
-		private static readonly ISet<Type> cSharpTupleTypes = GetCSharpTupleTypes();
+		private static readonly TypeSet cSharpTupleTypes = GetCSharpTupleTypes();
 
 		public static string GetFriendlyName(this Type? type)
 		{
@@ -154,6 +160,8 @@ namespace F0.Extensions
 
 		private static void SetFriendlyNullableValueName(Type underlyingValueType, bool useFullyQualifiedName, StringBuilder nameBuilder)
 		{
+			Debug.Assert(Nullable.GetUnderlyingType(underlyingValueType) is null, $"{underlyingValueType} should not be {nameof(Nullable)}.");
+
 			SetFriendlyName(underlyingValueType, useFullyQualifiedName, nameBuilder);
 			_ = nameBuilder.Append('?');
 		}
@@ -298,6 +306,8 @@ namespace F0.Extensions
 				{ typeof(uint), "uint" },
 				{ typeof(long), "long" },
 				{ typeof(ulong), "ulong" },
+				{ typeof(nint), "nint" },
+				{ typeof(nuint), "nuint" },
 				{ typeof(float), "float" },
 				{ typeof(double), "double" },
 				{ typeof(decimal), "decimal" },
