@@ -7,6 +7,7 @@ CHANGELOG
 - Added annotations for _nullable reference types_.
 - Added `Mathematics.Parity` checks for _native-sized integers_ (`nint` and `nuint`).
 - Changed `Extensions.TypeExtensions.GetFriendlyName` and `Extensions.TypeExtensions.GetFriendlyFullName`, pretty-printing both _native-sized integers_ (`System.IntPtr` and `System.UIntPtr`) as _C# 9.0_ keywords (`nint` and `nuint`).
+- Updated `.NET Standard 2.0` dependency on `Microsoft.Bcl.AsyncInterfaces` from `1.1.1` to `5.0.0`.
 - Fixed `TypeExtensions.GetFriendlyName`, throwing a `System.NullReferenceException` when passing a `System.Type` without a _namespace_.
 - Package: Embed icon (fixed _NuGet Warning NU5048_), keep fallback icon URL.
 
