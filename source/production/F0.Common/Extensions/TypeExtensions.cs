@@ -226,7 +226,7 @@ namespace F0.Extensions
 				length -= pointer;
 			}
 
-			if (length is 0)
+			if (length == 0)
 			{
 				SetFriendlyNonGenericName(type, !type.IsNested && useFullyQualifiedName, nameBuilder);
 			}
