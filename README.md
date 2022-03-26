@@ -9,7 +9,8 @@ This repo contains an independent .NET Class Library.
 [NuGet package](https://www.nuget.org/packages/F0.Common/)
 
 ## API Browser / Package Viewer
-[fuget](https://www.fuget.org/packages/F0.Common)\
+[NuGet Package Explorer](https://nuget.info/packages/F0.Common)\
+[FuGet Package Explorer](https://www.fuget.org/packages/F0.Common)\
 [DotNetApis](http://dotnetapis.com/pkg/F0.Common)\
 [NuGet Must Haves](https://nugetmusthaves.com/Package/F0.Common)\
 [NuGet Trends](https://nugettrends.com/packages?months=12&ids=F0.Common)
