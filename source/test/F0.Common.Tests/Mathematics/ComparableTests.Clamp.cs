@@ -1,11 +1,10 @@
 using System;
-using System.Diagnostics;
 using F0.Mathematics;
 using Xunit;
 
 namespace F0.Tests.Mathematics
 {
-	public class ComparableTests
+	public partial class ComparableTests
 	{
 		[Fact]
 		public void Clamp_Null_Throws()
@@ -103,7 +102,7 @@ namespace F0.Tests.Mathematics
 #if HAS_READONLY_SPAN
 			string text = new(str);
 #else
-			Debug.Assert(str.Length == 1);
+			Assert.Equal(1, str.Length);
 			string text = new(str[0], 1);
 #endif
 

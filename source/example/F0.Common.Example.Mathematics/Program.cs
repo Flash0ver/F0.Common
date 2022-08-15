@@ -17,8 +17,10 @@ namespace F0.Common.Example.Mathematics
 
 			const int min = -240;
 			const int max = +240;
-			Console.WriteLine($"{nameof(integer)} {integer} clamped to the inclusive range of {min} and {max}:");
-			Console.WriteLine(Comparable.Clamp(integer, min, max));
+			Console.WriteLine($"{nameof(integer)} {integer} clamped to the inclusive range of {min} and {max}: {Comparable.Clamp(integer, min, max)}");
+
+			Console.WriteLine($"The smaller {nameof(integer)} of {min} and {integer} is {Comparable.Min(min, integer)}.");
+			Console.WriteLine($"The larger {nameof(integer)} of {integer} and {max} is {Comparable.Max(integer, max)}.");
 		}
 
 		private static int GetInteger(string[] args)

@@ -2,6 +2,8 @@
 CHANGELOG
 
 ## vNext
+- Added `Mathematics.Comparable.Min<T>`, returning the smaller of two `System.IComparable<T>` instances.
+- Added `Mathematics.Comparable.Max<T>`, returning the larger of two `System.IComparable<T>` instances.
 
 ## v0.10.0 (2021-11-11)
 - Added target framework: `.NET 5`.
